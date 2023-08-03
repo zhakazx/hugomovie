@@ -1,7 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
-import { SWRConfig } from 'swr'
+import { SWRProvider } from './swr-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <SWRConfig value={{ provider: () => new Map() }}>
+    <SWRProvider>
       <html lang="en" data-theme="mytheme">
         <body className={inter.className}>{children}</body>
       </html>
-    </SWRConfig>
+    </SWRProvider>
   )
 }
