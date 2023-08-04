@@ -53,7 +53,7 @@ const index = () => {
           <span className="mx-auto loading loading-dots loading-lg"></span>
         </div>
       )}
-      {!loadingPopular && (
+      {popularMovies && !loadingPopular && (
         <div className="join flex justify-center items-center mt-4 mb-3">
           {pageIndex > 1 ? (
           <button 
