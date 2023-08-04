@@ -1,16 +1,20 @@
 "use client"
-import React from 'react'
+import { useState } from 'react'
 import * as api from "@/services/api"
 import useSWR from "swr"
 
 const index = () => {
   const BASE_IMG_URL = process.env.NEXT_PUBLIC_BASEIMGURL;
 
-  const { data: popularMovies, isLoading: loadingPopular } = useSWR("/movie/popular", async () => {
-      const response = await api.getPopularMovies();
-      return response.results;
+  const [pageIndex, setPageIndex] = useState(1)
+  
+  const { data: popularMovies, isLoading: loadingPopular } = useSWR(
+    `/movie/popular?page=${pageIndex}`, async () => {
+      const response = await api.getPopularMovies(pageIndex);
+      return response;
   })
-    console.log(popularMovies);
+  
+  console.log(popularMovies);
     
   return (
     <div className="px-4 mt-4">
@@ -18,7 +22,7 @@ const index = () => {
         Most Popular Movies
       </h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
-        {popularMovies && !loadingPopular && popularMovies?.map((item: any, i: any) => (
+        {popularMovies && !loadingPopular && popularMovies?.results?.map((item: any, i: any) => (
           <div className="card md:card-side md:card-compact bg-white shadow-xl" key={i}>
             <figure className="h-[200px] md:h-full w-full md:w-[70%]">
               <img 
@@ -47,6 +51,43 @@ const index = () => {
       {loadingPopular && (
         <div className="flex justify-center items-center">
           <span className="mx-auto loading loading-dots loading-lg"></span>
+        </div>
+      )}
+      {!loadingPopular && (
+        <div className="join flex justify-center items-center mt-4 mb-3">
+          {pageIndex > 1 ? (
+          <button 
+            onClick={() => setPageIndex(pageIndex - 1)} 
+            className="join-item btn btn-outline btn-primary w-[100px]">
+              Previous
+          </button>
+          ) : (
+          <button 
+            disabled
+            className="join-item btn btn-outline btn-primary w-[100px]">
+              Previous
+          </button>
+          )}
+
+          <button
+            className="join-item btn btn-outline btn-primary">
+              {pageIndex}
+          </button>
+           
+          {pageIndex < popularMovies?.total_pages ? (
+          <button 
+            onClick={() => setPageIndex(pageIndex + 1)}
+            className="join-item btn btn-outline btn-primary w-[100px]">
+            Next
+          </button>
+          ) : (
+          <button 
+            disabled
+            className="join-item btn btn-outline btn-primary w-[100px]">
+              Next
+          </button>
+          )}
+          
         </div>
       )}
 

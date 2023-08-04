@@ -11,9 +11,9 @@ const api = axios.create({
     }
 })
 
-export const getPopularMovies = async () => {
+export const getPopularMovies = async (pageIndex: any) => {
     try {
-        const response = await api.get("/movie/popular");
+        const response = await api.get(`/movie/popular?page=${pageIndex}`);
         return response.data;
     } catch (error) {
         console.log(error);
