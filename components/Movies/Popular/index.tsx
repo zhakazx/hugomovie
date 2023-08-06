@@ -58,32 +58,32 @@ const index = () => {
           {pageIndex > 1 ? (
           <button 
             onClick={() => setPageIndex(pageIndex - 1)} 
-            className="join-item btn btn-outline btn-primary w-[100px]">
+            className="join-item btn btn-outline w-[100px]">
               Previous
           </button>
           ) : (
           <button 
             disabled
-            className="join-item btn btn-outline btn-primary w-[100px]">
+            className="join-item btn btn-outline w-[100px]">
               Previous
           </button>
           )}
 
           <button
-            className="join-item btn btn-outline btn-primary">
+            className="join-item btn btn-outline">
               {pageIndex}
           </button>
            
           {pageIndex < popularMovies?.total_pages ? (
           <button 
             onClick={() => setPageIndex(pageIndex + 1)}
-            className="join-item btn btn-outline btn-primary w-[100px]">
+            className="join-item btn btn-outline w-[100px]">
             Next
           </button>
           ) : (
           <button 
             disabled
-            className="join-item btn btn-outline btn-primary w-[100px]">
+            className="join-item btn btn-outline w-[100px]">
               Next
           </button>
           )}
