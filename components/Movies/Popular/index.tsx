@@ -21,8 +21,8 @@ const index = () => {
       <h3 className="relative mb-6 text-2xl tracking-wide font-semibold before:content-[''] before:bg-[url('/dots-bg.svg')] before:w-9 before:h-9 before:absolute before:-left-[0.875rem]">
         Most Popular Movies
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
-        {popularMovies && !loadingPopular && popularMovies?.results?.map((item: any, i: any) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
+        {popularMovies && !loadingPopular && popularMovies?.results?.map((item: any, i: number) => (
           <div className="card card-side bg-white shadow-xl" key={i}>
             <figure className="h-full w-full">
               <img 
